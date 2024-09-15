@@ -13,7 +13,7 @@
             left: 0;
         }
 
-        /* Container for cube */
+
         .container {
             position: absolute;
             width: 256px;
@@ -71,7 +71,7 @@
             align-items: center;
             background: #000000;
             min-height: 100vh;
-            overflow: hidden; /* Hide overflow to prevent scrollbars */
+            overflow: hidden;
             position: relative;
         }
 
@@ -79,24 +79,25 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: url('stars.png'); /* Ensure this is the path to your stars image */
+            background: url('stars.png'); 
             background-size: cover;
             background-position: center;
         }
     </style>
 </head>
 <body>
-    <!-- Fondo de estrellas -->
+
     <canvas id="rainfall"></canvas>
 
-    <!-- Música de fondo -->
+
     <audio autoplay loop>
         <source src="assets/music.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
 
-    <!-- Sección principal con cubo -->
+
     <div class="container">
+
         <div class="cube" id="cube">
             <div class="face front"><img src="assets/images/1.jpg" alt="Image 1"></div>
             <div class="face back"><img src="assets/images/2.jpg" alt="Image 2"></div>
@@ -111,14 +112,14 @@
         const canvas = document.getElementById('rainfall');
         const ctx = canvas.getContext('2d');
 
-        // Set canvas size to match window size
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Create an array to store the raindrops
+
         const raindrops = [];
 
-        // Function to create a new raindrop
+
         function createRaindrop() {
             const x = Math.random() * canvas.width;
             const y = -5;
@@ -128,7 +129,7 @@
             raindrops.push({ x, y, speed, length });
         }
 
-        // Function to update the raindrops' positions
+
         function updateRaindrops() {
             for (let i = 0; i < raindrops.length; i++) {
                 const raindrop = raindrops[i];
@@ -142,7 +143,7 @@
             }
         }
 
-        // Function to draw the raindrops
+
         function drawRaindrops() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -159,7 +160,7 @@
             }
         }
 
-        // Function to animate the raindrops
+
         function animate() {
             createRaindrop();
             updateRaindrops();
@@ -168,7 +169,7 @@
             requestAnimationFrame(animate);
         }
 
-        // Start the animation
+
         animate();
     </script>
 </body>
