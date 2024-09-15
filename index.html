@@ -1,0 +1,175 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>For My Love</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Container for cube */
+        .container {
+            position: absolute;
+            width: 256px;
+            height: 256px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .cube {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transform: rotateX(0) rotateY(0);
+            transition: transform 1s;
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .front  { transform: rotateY(  0deg) translateZ(128px); }
+        .back   { transform: rotateY(180deg) translateZ(128px); }
+        .left   { transform: rotateY(-90deg) translateZ(128px); }
+        .right  { transform: rotateY( 90deg) translateZ(128px); }
+        .top    { transform: rotateX( 90deg) translateZ(128px); }
+        .bottom { transform: rotateX(-90deg) translateZ(128px); }
+
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins";
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+            min-height: 100vh;
+            overflow: hidden; /* Hide overflow to prevent scrollbars */
+            position: relative;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('stars.png'); /* Ensure this is the path to your stars image */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo de estrellas -->
+    <canvas id="rainfall"></canvas>
+
+    <!-- Música de fondo -->
+    <audio autoplay loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Sección principal con cubo -->
+    <div class="container">
+        <div class="cube" id="cube">
+            <div class="face front"><img src="assets/images/1.jpg" alt="Image 1"></div>
+            <div class="face back"><img src="assets/images/2.jpg" alt="Image 2"></div>
+            <div class="face left"><img src="assets/images/3.jpg" alt="Image 3"></div>
+            <div class="face right"><img src="assets/images/4.jpg" alt="Image 4"></div>
+            <div class="face top"><img src="assets/images/5.jpg" alt="Image 5"></div>
+            <div class="face bottom"><img src="assets/images/6.jpg" alt="Image 6"></div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('rainfall');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size to match window size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Create an array to store the raindrops
+        const raindrops = [];
+
+        // Function to create a new raindrop
+        function createRaindrop() {
+            const x = Math.random() * canvas.width;
+            const y = -5;
+            const speed = Math.random() * 5 + 2;
+            const length = Math.random() * 20 + 10;
+
+            raindrops.push({ x, y, speed, length });
+        }
+
+        // Function to update the raindrops' positions
+        function updateRaindrops() {
+            for (let i = 0; i < raindrops.length; i++) {
+                const raindrop = raindrops[i];
+
+                raindrop.y += raindrop.speed;
+
+                if (raindrop.y > canvas.height) {
+                    raindrops.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        // Function to draw the raindrops
+        function drawRaindrops() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+
+            for (let i = 0; i < raindrops.length; i++) {
+                const raindrop = raindrops[i];
+
+                ctx.beginPath();
+                ctx.moveTo(raindrop.x, raindrop.y);
+                ctx.lineTo(raindrop.x, raindrop.y + raindrop.length);
+                ctx.stroke();
+            }
+        }
+
+        // Function to animate the raindrops
+        function animate() {
+            createRaindrop();
+            updateRaindrops();
+            drawRaindrops();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start the animation
+        animate();
+    </script>
+</body>
+</html>
