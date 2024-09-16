@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cubo 3D y Animación de Lluvia</title>
+    <title>Te amo princesa</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
             font-family: Arial, sans-serif;
-            background: #000; /* Fondo negro para la animación de lluvia */
+            background: #000;
         }
 
         canvas {
@@ -18,7 +18,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            pointer-events: none; /* No interactuar con el canvas */
+            pointer-events: none; 
         }
 
         .container {
@@ -31,7 +31,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            perspective: 1000px; /* Perspectiva para el cubo */
+            perspective: 1000px; 
         }
 
         .cube {
@@ -86,18 +86,18 @@
     </div>
 
     <script>
-        // Configuración del canvas para la animación de lluvia
+
         const canvas = document.getElementById('rainfall');
         const ctx = canvas.getContext('2d');
 
-        // Ajustar el tamaño del canvas para que coincida con el tamaño de la ventana
+
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        // Array para almacenar las gotas de lluvia
+
         const raindrops = [];
 
-        // Función para crear una nueva gota de lluvia
+
         function createRaindrop() {
             const x = Math.random() * canvas.width;
             const y = -5;
@@ -107,7 +107,7 @@
             raindrops.push({ x, y, speed, length });
         }
 
-        // Función para actualizar las posiciones de las gotas de lluvia
+
         function updateRaindrops() {
             for (let i = 0; i < raindrops.length; i++) {
                 const raindrop = raindrops[i];
@@ -120,7 +120,7 @@
             }
         }
 
-        // Función para dibujar las gotas de lluvia
+
         function drawRaindrops() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -137,7 +137,7 @@
             }
         }
 
-        // Función para animar las gotas de lluvia
+
         function animate() {
             createRaindrop();
             updateRaindrops();
@@ -146,16 +146,16 @@
             requestAnimationFrame(animate);
         }
 
-        // Iniciar la animación
+
         animate();
 
-        // Ajustar el tamaño del canvas cuando cambie el tamaño de la ventana
+
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
 
-        // Configuración del cubo 3D
+
         const cube = document.getElementById('cube');
         let startX, startY, currentX, currentY, isDragging = false;
 
